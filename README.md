@@ -20,7 +20,7 @@
 - 기계적 메타물질의 분류, stiffness 기반 메타물질, micro/nano lattice, chiral / anti-chiral 구조 같은 대표 개념을 정리
 
 #### `협업미팅자료_이진영.pptx`
-- 비선형 기계 메타물질 inverse design 프로젝트의 실제 진행 상황과 이슈를 정리한 미팅 자료입니다.
+- 비선형 기계 메타물질 inverse design 프로젝트의 현재 진행 상황과 이슈를 정리한 미팅 자료입니다.
 - 실측 데이터셋 학습 후의 preliminary result, target response 대비 생성 결과, compression test와 hyperelastic coefficient 추정 이슈를 적었습니다.
 
 
@@ -148,6 +148,8 @@ KHU_Metamaterials/
 
 #### `gifs/`
 - 생성 결과 시각화 gif 모음입니다.
+- 하나의 gif에 각 8개의 target curve에 대해서 생성된 4개의 샘플이 저장되어 있습니다.
+- 0번 파일은 stress-strain을 수치화한 gif이며 2번과 3번은 각각 u1(x displacement), u2(ydisplacement)에 대한 gif 입니다.
 
 #### `target_vs_predicted_stress_strain_*`
 - 목표 응답과 예측 응답 비교 그림들입니다.
@@ -156,16 +158,15 @@ KHU_Metamaterials/
 ## 처음 보는 사람에게 추천하는 읽는 순서
 
 ### 연구 배경을 먼저 알고 싶은 경우
-1. 루트의 PDF/PPTX 자료 확인
+1. 루트의 메타물질 정리자료.PPTX 자료 확인
 2. `VideoMetamaterials_Code/README.md`
 3. `VideoMetamaterials_Result/`의 결과 gif/plot 확인
 
 ### 코드를 먼저 이해하고 싶은 경우
 1. `VideoMetamaterials_Code/README.md`
 2. `VideoMetamaterials_Code/main.py`
-3. `VideoMetamaterials_Code/model.yaml`
-4. `VideoMetamaterials_Code/src/`
-5. 필요 시 `abaqus/`, `eval_abaqus.py`
+3. `VideoMetamaterials_Code/src/`
+4. 필요 시 `abaqus/`, `eval_abaqus.py`
 
 ### 결과만 빠르게 보고 싶은 경우
 1. `VideoMetamaterials_Result/step_200000/gifs/`
@@ -176,11 +177,11 @@ KHU_Metamaterials/
 
 ## 실행/재현 시 참고
 
-현재 코드 구조상 완전한 재현에는 아래가 필요할 가능성이 큽니다.
+현재 코드 구조상 완전한 재현에는 아래가 필요합니다.
 
 - Python 3.11 계열 환경
 - PyTorch / Accelerate 등 diffusion 실행 의존성
 - 학습/추론용 데이터셋
 - 필요 시 Abaqus 라이선스 및 실행 환경
 
-자세한 의존성은 `VideoMetamaterials_Code/README.md`와 `model.yaml` 기준으로 확인하면 됩니다.
+자세한 의존성은 `VideoMetamaterials_Code/README.md`기준으로 확인하면 됩니다.
