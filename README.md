@@ -45,7 +45,6 @@ KHU_Metamaterials/
 #### `README.md`
 - 원본 프로젝트 설명 문서입니다.
 - 논문 링크, 데이터 다운로드 위치, 기본 실행 방법, Abaqus 평가 방법이 들어 있습니다.
-- **이 프로젝트의 배경을 가장 먼저 이해하려면 이 파일부터 보는 게 좋습니다.**
 
 #### `main.py`
 - 이 저장소의 **메인 실행 진입점**입니다.
@@ -59,7 +58,7 @@ KHU_Metamaterials/
  - `load_model_step`
  - `num_preds`
  - `guidance_scale`
-- 즉, **실제로 모델을 돌릴 때 가장 먼저 수정하게 될 파일**입니다.
+- **실제로 모델을 돌릴 때 실행하게 될 파일**입니다.
 
 #### `model.yaml`
 - 모델/학습 설정 파일입니다.
@@ -118,22 +117,12 @@ KHU_Metamaterials/
 #### `autoRun.bat`
 - Windows에서 eval_abaqus.py 파일을 반복 실행 하기 위한 배치 파일입니다.
 
-### 참고 이미지/문서
-
-- `pred_light.gif`, `pred_dark.gif`
-- `target_responses_stress_strain.png`
-- `target_responses_stress_strain_subplots.png`
-- `target_00_07_vs_4_predictions_grid.png`
-- `Videometamaterial settings.pdf`
-- 기타 PDF 자료
-
-이 파일들은 **논문식 결과 예시나 설정 참고자료**로 보면 됩니다.
 
 ---
 
 ## 2. `VideoMetamaterials_Result/`
 
-실행 결과를 모아둔 폴더입니다.
+flexible 80a 데이터셋 학습 모델의 실행 결과를 모아둔 폴더입니다.
 
 
 - `step_200000/` 내부에 다음 자료들이 있습니다.
@@ -184,4 +173,4 @@ KHU_Metamaterials/
 - 학습/추론용 데이터셋
 - 필요 시 Abaqus 라이선스 및 실행 환경
 
-자세한 의존성은 `VideoMetamaterials_Code/README.md`기준으로 확인하면 됩니다.
+baseline논문과 저희의 데이터셋이 필요하시면 coolget159@khu.ac.kr로 메일주시면 전달 드리겠습니다.
