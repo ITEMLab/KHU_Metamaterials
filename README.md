@@ -1,49 +1,37 @@
 # KHU_Metamaterials
 
-경희대 메타물질 관련 공부 자료와 실험/코드 결과를 한곳에 모아둔 저장소입니다. 처음 들어오는 사람이 **무엇을 봐야 하는지 빠르게 파악**할 수 있도록 폴더별 역할을 정리했습니다.
-
+메타물질 관련 공부 자료와 실험/코드 결과를 한곳에 모아둔 저장소입니다. 
 ## 빠른 길잡이
 
 - **코드를 보고 싶으면** → `VideoMetamaterials_Code/`
 - **생성 결과/시각화 결과를 보고 싶으면** → `VideoMetamaterials_Result/`
-- **개인 정리 문서(PDF/PPTX 등)** → 저장소 루트의 한국어 문서 파일들
+- **개인 정리 문서** → 저장소 루트의 한국어 문서 파일들
 - **실행 시작점** → `VideoMetamaterials_Code/main.py`
-- **모델 설정값 확인** → `VideoMetamaterials_Code/model.yaml`
 
-### 루트 문서 빠른 설명
+### 루트 문서 설명
 
 #### `데이터셋 생성 설명서.pdf`
 - 논문 기반 메타물질 데이터셋을 어떻게 생성하는지 단계별로 풀어쓴 설명 문서입니다.
-- 무작위 주파수 패턴 생성 → 역푸리에 변환 → 이진화 → 유효성 검사 → 대칭 복사까지의 흐름이 정리되어 있습니다.
-- 후반부에는 Abaqus 코드에서 geometry를 part로 변환하는 과정과 mesh/edge/node 구성 아이디어도 함께 설명합니다.
-- **데이터 생성 파이프라인을 이해하려면 가장 먼저 읽기 좋은 문서**입니다.
+- 무작위 geometry 패턴 생성 → 이진화 → 유효성 검사 → 대칭 복사까지의 파이프라인을 정리.
+- 후반부에는 Abaqus 코드에서 geometry를 part로 변환하는 과정과 mesh/edge/node 구성 아이디어도 함께 설명.
 
 #### `메타물질 정리자료_이진영.pptx`
 - 메타물질 전반을 개괄하는 입문 발표자료입니다.
-- 기계적 메타물질의 분류, stiffness 기반 메타물질, micro/nano lattice, chiral / anti-chiral 구조 같은 대표 개념이 정리되어 있습니다.
-- 관련 논문 예시와 구조별 특징이 들어 있어, 연구실에 처음 들어온 사람이 배경지식을 잡기에 좋습니다.
-- **분야 전체 그림을 먼저 잡고 싶을 때 읽기 좋은 자료**입니다.
+- 기계적 메타물질의 분류, stiffness 기반 메타물질, micro/nano lattice, chiral / anti-chiral 구조 같은 대표 개념을 정리
 
 #### `협업미팅자료_이진영.pptx`
-- 비선형 기계 메타물질 inverse design 프로젝트의 실제 진행 상황과 이슈를 정리한 협업/미팅용 자료입니다.
-- 실측 데이터셋 학습 후의 preliminary result, target response 대비 생성 결과, compression test와 hyperelastic coefficient 추정 문제를 다룹니다.
-- 특히 FE 재평가 mismatch, Abaqus 세팅 검토 필요성, usable FE output 비율(예: 53,008개 중 4,614개) 같은 실무 이슈가 들어 있습니다.
-- **현재 연구가 어디까지 진행됐고 무엇이 막히는지 빠르게 파악하려면 이 문서를 보는 게 좋습니다.**
+- 비선형 기계 메타물질 inverse design 프로젝트의 실제 진행 상황과 이슈를 정리한 미팅 자료입니다.
+- 실측 데이터셋 학습 후의 preliminary result, target response 대비 생성 결과, compression test와 hyperelastic coefficient 추정 이슈를 적었습니다.
 
-### 추천 읽는 순서
-
-1. `메타물질 정리자료_이진영.pptx` — 분야 전체 개요와 분류 이해
-2. `데이터셋 생성 설명서.pdf` — 실제 데이터 생성 파이프라인 이해
-3. `협업미팅자료_이진영.pptx` — 현재 프로젝트 진행 상황과 병목 확인
 
 ## 폴더 구조
 
 ```text
 KHU_Metamaterials/
-├─ VideoMetamaterials_Code/      # 메인 코드, 설정, 보조 스크립트, 예시 결과
-├─ VideoMetamaterials_Result/    # 학습/추론 후 생성된 결과물
-├─ *.pdf / *.pptx                # 공부/정리 문서, 발표자료, 참고자료
-└─ README.md                     # 현재 문서
+├─ VideoMetamaterials_Code/ # 메인 코드, 설정, 보조 스크립트, 예시 결과
+├─ VideoMetamaterials_Result/ # 학습/추론 후 생성된 결과물
+├─ *.pdf / *.pptx # 공부/정리 문서, 발표자료, 참고자료
+└─ README.md # 현재 문서
 ```
 
 ---
@@ -62,15 +50,15 @@ KHU_Metamaterials/
 #### `main.py`
 - 이 저장소의 **메인 실행 진입점**입니다.
 - 현재 코드상 기본 동작은:
-  - 기존 체크포인트를 불러와
-  - target stress-strain curve 기준으로
-  - 샘플을 생성하는 `eval_only=True` 모드입니다.
+ - 기존 체크포인트를 불러와
+ - target stress-strain curve 기준으로
+ - 샘플을 생성하는 `eval_only=True` 모드입니다.
 - 주요 사용자 입력:
-  - `eval_only`
-  - `run_name`, `load_run_name`
-  - `load_model_step`
-  - `num_preds`
-  - `guidance_scale`
+ - `eval_only`
+ - `run_name`, `load_run_name`
+ - `load_model_step`
+ - `num_preds`
+ - `guidance_scale`
 - 즉, **실제로 모델을 돌릴 때 가장 먼저 수정하게 될 파일**입니다.
 
 #### `model.yaml`
@@ -87,8 +75,8 @@ KHU_Metamaterials/
 #### `src/`
 - 공통 유틸리티 코드가 들어 있습니다.
 - 현재 확인된 핵심 파일:
-  - `normalization.py`: 데이터 정규화 관련 로직
-  - `utils.py`: 보조 함수 모음
+ - `normalization.py`: 데이터 정규화 관련 로직
+ - `utils.py`: 보조 함수 모음
 
 #### `denoising_diffusion_pytorch/`
 - diffusion 모델 구현부입니다.
@@ -98,17 +86,13 @@ KHU_Metamaterials/
 #### `abaqus/`
 - Abaqus CAE 평가용 보조 코드입니다.
 - 주요 파일:
-  - `abaqus_script.py`
-  - `abq_utils.py`
+ - `abaqus_script.py`
+ - `abq_utils.py`
 - 생성된 geometry를 실제 FEM으로 검증할 때 참고하면 됩니다.
 
 #### `runs/`
-- 학습 결과/불러온 결과 저장 경로입니다.
-- 현재는 `runs/training/eval_target_w_5.0_1` 같은 결과 폴더가 보입니다.
+- 학습 결과/불러온 결과 저장 경로 입니다.
 
-#### `grf_samples/`
-- 샘플 데이터/중간 입력 관련 폴더로 보입니다.
-- 실제 실험 데이터 또는 생성용 샘플을 확인할 때 살펴보면 됩니다.
 
 ### 보조 스크립트 설명
 
@@ -132,7 +116,7 @@ KHU_Metamaterials/
 - 시각화/이미지 처리 관련 보조 스크립트로 보입니다.
 
 #### `autoRun.bat`
-- Windows에서 반복 실행을 간단히 하기 위한 배치 파일입니다.
+- Windows에서 eval_abaqus.py 파일을 반복 실행 하기 위한 배치 파일입니다.
 
 ### 참고 이미지/문서
 
@@ -151,49 +135,23 @@ KHU_Metamaterials/
 
 실행 결과를 모아둔 폴더입니다.
 
-현재 확인된 구조상:
 
-- `step_200000/`
-  - 특정 학습 step에서 저장된 결과로 보입니다.
-- 내부에 다음 자료들이 있습니다.
-  - `geometries.csv`
-  - `gifs/`
-  - stress-strain 비교 이미지들
+- `step_200000/` 내부에 다음 자료들이 있습니다.
+ - `geometries.csv`
+ - `gifs/`
+ - stress-strain 비교 이미지들
 
 ### 안에서 볼 것
 
 #### `geometries.csv`
 - 생성된 메타물질 geometry 정보가 저장된 파일입니다.
-- 후속 평가나 재현 실험의 시작점이 됩니다.
 
 #### `gifs/`
 - 생성 결과 시각화 gif 모음입니다.
-- 사람이 결과를 빠르게 훑어보기에 가장 좋은 폴더입니다.
 
 #### `target_vs_predicted_stress_strain_*`
 - 목표 응답과 예측 응답 비교 그림들입니다.
-- **모델이 원하는 기계적 응답을 얼마나 잘 맞췄는지** 확인할 때 가장 중요합니다.
 
----
-
-## 3. 루트의 PDF / PPTX / 기타 문서
-
-루트에는 코드 외에도 여러 한글 문서(PDF, PPTX)가 있습니다.
-이 파일들은 대체로 다음 성격으로 보는 게 좋습니다.
-
-- 공부하며 정리한 참고자료
-- 발표자료 또는 세미나용 요약본
-- 실험/연구 배경 설명 문서
-
-즉, 이 저장소는 단순 코드 저장소가 아니라:
-
-1. **연구 배경 문서**
-2. **실행 코드**
-3. **실험/생성 결과**
-
-를 함께 모아 둔 개인/연구실 정리 저장소라고 보면 됩니다.
-
----
 
 ## 처음 보는 사람에게 추천하는 읽는 순서
 
@@ -226,24 +184,3 @@ KHU_Metamaterials/
 - 필요 시 Abaqus 라이선스 및 실행 환경
 
 자세한 의존성은 `VideoMetamaterials_Code/README.md`와 `model.yaml` 기준으로 확인하면 됩니다.
-
----
-
-## 관리 메모
-
-이 README는 **처음 들어오는 학생이 길을 잃지 않도록 만드는 안내서** 성격입니다.
-향후 더 정리하려면 다음도 추천합니다.
-
-- 루트의 한글 문서 파일명을 더 설명적인 이름으로 정리
-- `VideoMetamaterials_Result/`에 실험 날짜/목적별 서브폴더 추가
-- 환경 재현용 `requirements.txt` 또는 `environment.yml` 추가
-- `main.py`의 실행 모드 예시를 README에 더 구체적으로 기록
-
----
-
-## 한 줄 요약
-
-- **배경 문서**는 루트 PDF/PPTX
-- **핵심 실행 코드**는 `VideoMetamaterials_Code/`
-- **결과 확인**은 `VideoMetamaterials_Result/`
-- **가장 먼저 볼 파일**은 `VideoMetamaterials_Code/README.md`, `main.py`, `model.yaml`
